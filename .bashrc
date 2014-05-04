@@ -89,7 +89,7 @@ update_prompt ()
     PS1+="${HI}${FCYN}\u${RST}${FGRN}@${HI}\h${RST} ${FYLW}${HI}\w${RST}"
 
     # git - current branch
-    PS1+="${HI}${FMAG}$(__git_ps1 ' (%s)')${RST}"
+    PS1+="${__git_ps1:+${HI}${FMAG}$(__git_ps1 ' (%s)')${RST}}"
 
     # set prompt sign color (green if the last command was successful, otherwise red)
     if [[ $STATUS -eq 0 ]]; then
