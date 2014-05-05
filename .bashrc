@@ -27,7 +27,7 @@
 shopt -s cdspell
 
 
-# - - - - - Performance tunning - - - - -
+# - - - - - Performance tuning - - - - -
 
 # check the hash before searching the PATH directories
   shopt -s checkhash
@@ -54,10 +54,10 @@ shopt -s cdspell
 # [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 
-# - - - - - Color definitions - - - - -
+# - - - - - Colour definitions - - - - -
 
 RST="\[\033[0m\]"   # reset
-HI="\[\033[1m\]"    # hicolor
+HI="\[\033[1m\]"    # bright colour
 INV="\[\033[7m\]"   # inverse background and foreground
 FRED="\[\033[31m\]" # foreground red
 FGRN="\[\033[32m\]" # foreground green
