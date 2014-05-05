@@ -31,9 +31,9 @@ If the last command returns non-zero code, there will be another line in the pro
 
 Format is as follows:
 
-`
+```
 [exit_code]
 
 [date time] username@host working_directory (git_branch git_status)
 prompt_sign
-`
+```
