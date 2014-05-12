@@ -14,15 +14,25 @@ alias du='du -h'
 alias duf='du -s *'
 alias dud='du --max-depth=1'
 
-# Misc :)
-alias less='less -r --LINE-NUMBERS'           # raw control characters, show line numbers
-alias whence='type -a'                        # where, of a sort
-alias grep='grep --color'                     # show differences in colour
-alias egrep='egrep --color=auto'              # show differences in colour
-alias fgrep='fgrep --color=auto'              # show differences in colour
+# misc
+alias less='less -r --LINE-NUMBERS'         # raw control characters, show line numbers
+alias whence='type -a'                      # where, of a sort
 
-# Some shortcuts for different directory listings
-alias ls='ls --color -hF' # all listings in color, classified, human readable
+# enable color support
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+    alias grep='grep --color=auto'          # show differences in colour
+    alias egrep='egrep --color=auto'        # show differences in colour
+    alias fgrep='fgrep --color=auto'        # show differences in colour
+
+    alias ls='ls -hF --color=auto'          # all listings in color, classified, human readable
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+else
+    alias ls='ls -hF'                       # classified, human readable
+fi
+
 alias ll='ls -l'          # long list
 alias la='ls -lA'         # long list, show almost all
 alias lr='ls -tR'         # sort by date, recursive
