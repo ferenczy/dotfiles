@@ -40,5 +40,12 @@ alias ff='find . -type f -name'
 alias ..='cd ../'
 alias ...='cd ../../'
 
+# safety
+alias rm='rm --preserve-root'       # do not delete /
+
+# forbid permissions change on /
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 # Calendar - defaults to print 3 months with week starting by Monday
 alias cal='cal -3m'
