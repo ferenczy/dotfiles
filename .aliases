@@ -3,8 +3,8 @@
 
 # .aliases: Common aliases shared between shells
 
-# Interactive operation...
-alias rm='rm -i'
+# interactive operation...
+alias rm='rm -I'    # prompt before removing more than 3 files or recursive
 alias cp='cp -i'
 alias mv='mv -i'
 
