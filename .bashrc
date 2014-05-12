@@ -240,3 +240,6 @@ fi
 # }
 #
 # alias cd=cd_func
+
+# make directory structure and cd into ("md test/test2")
+md () { mkdir -p "$@" && cd "$@"; }
