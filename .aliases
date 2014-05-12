@@ -8,7 +8,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Default to human readable figures
+# default to human readable figures
 alias df='df -h'
 alias du='du -h'
 alias duf='du -s *'
@@ -33,6 +33,7 @@ else
     alias ls='ls -hF'                       # classified, human readable
 fi
 
+# some shortcuts for different directory listings
 alias ll='ls -l'          # long list
 alias la='ls -lA'         # long list, show almost all
 alias lr='ls -tR'         # sort by date, recursive
@@ -43,8 +44,8 @@ alias ldot='ls -ld .*'
 alias lS='ls -1Ss'        # sort by size
 
 # find
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
+alias fd='find . -type d -name'     # find directory
+alias ff='find . -type f -name'     # find file
 
 # directory up shortcuts
 alias ..='cd ../'
@@ -57,5 +58,6 @@ alias rm='rm --preserve-root'       # do not delete /
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-# Calendar - defaults to print 3 months with week starting by Monday
+
+# calendar - defaults to print 3 months with week starting by Monday
 alias cal='cal -3m'
