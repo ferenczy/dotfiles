@@ -33,16 +33,10 @@ fi
 #   INFOPATH="${HOME}/info:${INFOPATH}"
 # fi
 
-# Cygwin specific
-if [[ $TERM == 'cygwin' ]] ; then
-    # fix VirtualBox's & Vagrant's HOME to Windows user's profile
-    export VAGRANT_HOME="C:/Users/$USER/.vagrant.d/"
-    export VBOX_USER_HOME="C:/Users/$USER/.VirtualBox/"
 
-    export PATH=$PATH:"/cygdrive/c/Program Files/Oracle/VirtualBox/"
+# - - - - - Local setting - - - - -
 
-    # vboxmanage setproperty machinefolder "D:\\virtuals\\"
-
-    # ssh-pageant
-    eval $(/usr/bin/ssh-pageant -ra /tmp/.ssh-pageant)
+# Put your custom setting there
+if [ -f "${HOME}/.localrc" ]; then
+  source "${HOME}/.localrc"
 fi

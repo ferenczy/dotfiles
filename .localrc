@@ -1,0 +1,21 @@
+# Dawid Ferenczy 2014
+# http://github.com/ferenczy/dotfiles
+
+# ~/.localrc: user or machine specific settings.
+
+# Cygwin specific settings
+if [[ $TERM == 'cygwin' ]] ; then
+    # fix VirtualBox's & Vagrant's HOME to Windows user's profile
+    export VAGRANT_HOME="C:/Users/$USER/.vagrant.d/"
+    export VBOX_USER_HOME="C:/Users/$USER/.VirtualBox/"
+
+    export PATH=$PATH:"/cygdrive/c/Program Files/Oracle/VirtualBox/"
+
+    # vboxmanage setproperty machinefolder "D:\\virtuals\\"
+
+    # disable apt-cyg WPAD (Web Proxy AutoDiscovery)
+    export APT_CYG_PROXY=inherit
+
+    # ssh-pageant
+    eval $(/usr/bin/ssh-pageant -ra /tmp/.ssh-pageant)
+fi
