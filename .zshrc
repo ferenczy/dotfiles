@@ -53,7 +53,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+
+# - - - - - User configuration - - - - -
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -70,6 +71,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+
+# - - - - - Aliases - - - - -
 
 # Common aliases
 if [ -f "${HOME}/.aliases" ]; then
