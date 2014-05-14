@@ -4,7 +4,7 @@
 # ~/.localrc: user or machine specific settings.
 
 # Cygwin specific settings
-if [[ $TERM == 'cygwin' ]] ; then
+if [[ `uname -o` == 'Cygwin' ]] ; then
     # fix VirtualBox's & Vagrant's HOME to Windows user's profile
     export VAGRANT_HOME="C:/Users/$USER/.vagrant.d/"
     export VBOX_USER_HOME="C:/Users/$USER/.VirtualBox/"
