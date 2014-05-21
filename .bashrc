@@ -141,7 +141,7 @@ HISTFILESIZE=2000
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
 # export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:l[als]' # Ignore the ls command as well
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:l[als]:pwd' # Ignore the ls command as well
 
 # Whenever displaying the prompt, write the previous line to disk
 export -n PROMPT_COMMAND+="; history -a"
