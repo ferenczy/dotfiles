@@ -81,6 +81,14 @@ if [ -f "${HOME}/.aliases" ]; then
 fi
 
 
+# - - - - - Functions - - - - -
+
+# Common functions
+if [ -f "${HOME}/.functions" ]; then
+  source "${HOME}/.functions"
+fi
+
+
 # - - - - - Local setting - - - - -
 
 # Put your custom setting there
