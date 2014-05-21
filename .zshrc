@@ -49,7 +49,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(extract git knife screen vagrant)
+plugins=(extract git knife screen zsh-syntax-highlighting vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -71,6 +71,17 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+# zsh Syntax Highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
+
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[function]='fg=green'
+ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=cyan'
 
 
 # - - - - - Aliases - - - - -
