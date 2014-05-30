@@ -61,3 +61,14 @@ alias chgrp='chgrp --preserve-root'
 
 # calendar - defaults to print 3 months with week starting by Monday
 alias cal='cal -3m'
+
+# Git
+
+alias gits='git status -s'              # short status
+alias gitd='git diff --color-words'     # diff of unstaged changes
+alias gitdc='gitd --cached'             # diff of staged changes
+# git log pretty
+alias gitlp='git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset" --abbrev-commit --date=default'
+alias gitls='gitlp --graph'             # git log short (with graph)
+alias gitl='gitlp --name-status'        # git log with changed files
+alias gitld='gitlp -p --color'          # git log with diffs
