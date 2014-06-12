@@ -3,10 +3,16 @@
 
 # .aliases: Common aliases shared between shells
 
-# interactive operation...
-alias rm='rm -I'    # prompt before removing more than 3 files or recursive
+# safety, interactive operation...
+alias rm='rm -I --preserve-root'    # prompt before removing more than 3 files or recursive
 alias cp='cp -i'
 alias mv='mv -i'
+alias mv='ln -i'
+
+# forbid permissions change on /
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 
 # default to human readable figures
 alias df='df -h'
@@ -51,13 +57,8 @@ alias ff='find . -type f -name'     # find file
 alias ..='cd ../'
 alias ...='cd ../../'
 
-# safety
-alias rm='rm --preserve-root'       # do not delete /
-
-# forbid permissions change on /
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
+# format PATH
+alias path='echo -e ${PATH//:/\\n}'
 
 # calendar - defaults to print 3 months with week starting by Monday
 alias cal='cal -3m'
