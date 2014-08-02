@@ -49,7 +49,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(extract gem git knife pip screen zsh-syntax-highlighting vagrant)
+plugins=(extract gem git knife node nvm pip screen zsh-syntax-highlighting vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
