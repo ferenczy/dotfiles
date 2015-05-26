@@ -7,8 +7,15 @@ PROMPT+=$'\n'
 # date and time
 PROMPT+=$'%{$fg[cyan]%}[%D{%Y-%m-%d %H:%M.%S}]%{$reset_color%} '
 
+# different color for SSH connections
+if [[ -n $SSH_CLIENT ]]; then
+    host_color=$fg_bold[magenta]
+else
+    host_color=$fg[magenta]
+fi
+
 # username@hostname working_directory (git_branch)
-PROMPT+=$'%{$fg_bold[cyan]%}%n%{$reset_color%}%{$fg[green]%}@%{$fg_bold[green]%}%m%{$reset_color%} %{$fg_bold[yellow]%}%~%{$reset_color%}$(git_prompt_info)'
+PROMPT+=$'%{$fg_bold[cyan]%}%n%{$reset_color%}%{$host_color%}@%{$fg_bold[green]%}%m%{$reset_color%} %{$fg_bold[yellow]%}%~%{$reset_color%}$(git_prompt_info)'
 
 # prompt sign (green if the last command was successful, otherwise red)
 PROMPT+=$'\n%{$bg[black]%}%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%{\e[7m%}\$%{$reset_color%} '
@@ -17,8 +24,8 @@ PROMPT+=$'\n%{$bg[black]%}%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%{\e[7m%}\$%
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg_bold[magenta]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[magenta]%})%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗ %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔ %{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚ "
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}⚑ "
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖ "

@@ -73,8 +73,10 @@ INV="\[\033[7m\]"   # inverse background and foreground
 FRED="\[\033[31m\]" # foreground red
 FGRN="\[\033[32m\]" # foreground green
 FYLW="\[\033[33m\]" # foreground yellow
+FBLU="\[\033[34m\]" # foreground blue
 FMAG="\[\033[35m\]" # foreground magenta
 FCYN="\[\033[36m\]" # foreground cyan
+FWHT="\[\033[37m\]" # foreground white
 BBCK="\[\033[40m\]" # background black
 
 
@@ -96,8 +98,13 @@ update_prompt ()
     # empty line after last output, date and time
     PS1+="\n${FCYN}[\D{%Y-%m-%d %H:%M.%S}]${RST} "
 
+    # different color for SSH connections
+    if [[ $SSH_CLIENT ]]; then
+        HOST_COLOR=$HI
+    fi
+
     # username, hostname and working directory
-    PS1+="${HI}${FCYN}\u${RST}${FGRN}@${HI}\h${RST} ${FYLW}${HI}\w${RST}"
+    PS1+="${HI}${FCYN}\u${RST}${FMAG}${HOST_COLOR}@${HI}${FGRN}\h${RST} ${FYLW}${HI}\w${RST}"
 
     # git - current branch
     type -t __git_ps1 > /dev/null 2>&1
