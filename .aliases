@@ -7,7 +7,7 @@
 alias rm='rm -I --preserve-root'    # prompt before removing more than 3 files or recursive
 alias cp='cp -i'
 alias mv='mv -i'
-alias mv='ln -i'
+alias ln='ln -i'
 
 # forbid permissions change on /
 alias chown='chown --preserve-root'
