@@ -8,6 +8,9 @@ if v:progname =~? "evim"
   finish
 endif
 
+" set default file encoding
+set encoding=utf-8
+
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 
@@ -15,6 +18,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -116,5 +120,3 @@ set clipboard=unnamedplus
 
 " Show line numbers
 set number
-
-set encoding=utf-8
