@@ -18,4 +18,19 @@ if [[ `uname -o` == 'Cygwin' ]] ; then
 
     # ssh-pageant
     eval $(/usr/bin/ssh-pageant -ra /tmp/.ssh-pageant)
+
+    # Notepad++
+    np() {
+        cygstart "/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe" `cygpath -wa "$*"`
+    }
+
+    # Atom Editor
+    atom() {
+        cygstart /cygdrive/c/Users/ferenczy/AppData/Local/atom/app-0.158.0/atom.exe `cygpath -wa "$*"`
+    }
+
+    # Total Commander
+    tc() {
+        cygstart "/cygdrive/c/Program Files/totalcmd64/TOTALCMD64.EXE" -T `cygpath -wa "$*"`
+    }
 fi
