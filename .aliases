@@ -35,6 +35,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls -hF --color=auto'          # all listings in color, classified, human readable
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
+
+    # use colordiff as diff (requires colordiff installed)
+    if [ -x /usr/bin/colordiff ]; then
+        alias diff='colordiff'
+    fi
 else
     alias ls='ls -hF'                       # classified, human readable
 fi
