@@ -21,7 +21,7 @@ Vim configuration is based on [Vundle.vim](https://github.com/gmarik/Vundle.vim)
 PowerShell
 ----------
 
-Few things are configured in the PowerShell profile, most notably the prompt, aliases and loading of PowerShell modules.
+Few things are configured in the PowerShell profile, most notably the prompt, aliases and loading of PowerShell modules. PowerShell profile should be located in `%SystemDrive%\Users\<username>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`.
 
 
 Prompt
