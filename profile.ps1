@@ -15,15 +15,10 @@ new-item alias:np -value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $nul
 Write-Host PowerShell $PSVersionTable.PSVersion "|" CLR $PSVersionTable.CLRVersion -ForegroundColor Magenta
 Write-Host
 
-# get identity of currently logged in user
-$CurrentIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$global:CurrentUser = $CurrentIdentity.Name.Split("\")[1]
-
-# set function to print the prompt
 function prompt {
     Write-Host
     Write-Host ("[" + $(Get-Date -UFormat "%Y-%m-%d %H:%M.%S") + "] ") -nonewline -ForegroundColor DarkCyan
-    Write-Host $CurrentUser -nonewline -ForegroundColor Cyan
+    Write-Host $env:username -nonewline -ForegroundColor Cyan
     Write-Host "@" -nonewline -ForegroundColor DarkMagenta
     Write-Host $env:COMPUTERNAME.ToLower() -nonewline -ForegroundColor Green
     Write-Host " " -nonewline
