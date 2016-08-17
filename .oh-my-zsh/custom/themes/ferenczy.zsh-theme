@@ -1,5 +1,5 @@
 # display last command's status code, if it's not 0
-PROMPT=$'%{$reset_color%}%(?::%{$fg_bold[red]%}[$?]%{$reset_color%}\n)'
+PROMPT=$'%{$reset_color%}%(?:%{$fg_bold[green]%}✔ :%{$fg_bold[red]%}✗ [$?])%{$reset_color%}\n'
 
 # put empty line after last output
 PROMPT+=$'\n'
