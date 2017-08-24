@@ -1,4 +1,4 @@
-# Dawid Ferenczy 2014
+# Dawid Ferenczy 2014 - 2017
 # http://github.com/ferenczy/dotfiles
 
 # base-files version 4.1-1
@@ -154,19 +154,6 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:l[als]:pwd' # Ignore the ls command as w
 export -n PROMPT_COMMAND+="; history -a"
 
 
-# - - - - - Aliases - - - - -
-
-# Common aliases
-if [ -f "${HOME}/.aliases" ]; then
-  source "${HOME}/.aliases"
-fi
-
-# Bash specific aliases
-# if [ -f "${HOME}/.bash_aliases" ]; then
-#   source "${HOME}/.bash_aliases"
-# fi
-
-
 # - - - - - Umask - - - - -
 
 # /etc/profile sets 022, removing write perms to group + others.
@@ -176,15 +163,28 @@ fi
 # umask 077
 
 
+# - - - - - Aliases - - - - -
+
+# Common aliases
+if [[ -f "${HOME}/.aliases" ]]; then
+  source "${HOME}/.aliases"
+fi
+
+# Bash specific aliases
+# if [ -f "${HOME}/.bash_aliases" ]; then
+#   source "${HOME}/.bash_aliases"
+# fi
+
+
 # - - - - - Functions - - - - -
 
 # Common functions
-if [ -f "${HOME}/.functions" ]; then
+if [[ -f "${HOME}/.functions" ]]; then
   source "${HOME}/.functions"
 fi
 
 # Some people use a different file for functions
-if [ -f "${HOME}/.bash_functions" ]; then
+if [[ -f "${HOME}/.bash_functions" ]]; then
   source "${HOME}/.bash_functions"
 fi
 

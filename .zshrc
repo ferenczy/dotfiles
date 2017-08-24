@@ -1,4 +1,4 @@
-# Dawid Ferenczy 2014
+# Dawid Ferenczy 2014 - 2017
 # http://github.com/ferenczy/dotfiles
 
 # .zshrc: Z shell configuration files
@@ -105,7 +105,7 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,bg=red'
 # - - - - - Aliases - - - - -
 
 # Common aliases
-if [ -f "${HOME}/.aliases" ]; then
+if [[ -f "${HOME}/.aliases" ]]; then
   source "${HOME}/.aliases"
 fi
 
@@ -113,7 +113,7 @@ fi
 # - - - - - Functions - - - - -
 
 # Common functions
-if [ -f "${HOME}/.functions" ]; then
+if [[ -f "${HOME}/.functions" ]]; then
   source "${HOME}/.functions"
 fi
 
@@ -121,6 +121,6 @@ fi
 # - - - - - Local setting - - - - -
 
 # Put your custom setting there
-if [ -f "${HOME}/.localrc" ]; then
+if [[ -f "${HOME}/.localrc" ]]; then
   source "${HOME}/.localrc"
 fi

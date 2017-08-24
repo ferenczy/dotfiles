@@ -6,6 +6,6 @@
 # User dependent .zprofile file
 
 # source common profile
-if [ -f "${HOME}/.profile" ] ; then
+if [[ -f "${HOME}/.profile" ]] ; then
   source "${HOME}/.profile"
 fi
