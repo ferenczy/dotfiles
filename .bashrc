@@ -187,3 +187,11 @@ fi
 if [ -f "${HOME}/.bash_functions" ]; then
   source "${HOME}/.bash_functions"
 fi
+
+
+# - - - - - Local setting - - - - -
+
+# Put your custom setting there
+if [ -f "${HOME}/.localrc" ]; then
+  source "${HOME}/.localrc"
+fi

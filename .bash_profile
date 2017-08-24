@@ -37,11 +37,3 @@ fi
 # if [ -d "${HOME}/info" ]; then
 #   INFOPATH="${HOME}/info:${INFOPATH}"
 # fi
-
-
-# - - - - - Local setting - - - - -
-
-# Put your custom setting there
-if [ -f "${HOME}/.localrc" ]; then
-  source "${HOME}/.localrc"
-fi
