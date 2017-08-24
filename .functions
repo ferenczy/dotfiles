@@ -1,0 +1,17 @@
+# print currently active shell
+shell () {
+  ps -p $$ | tail -1 | awk '{print $NF}'
+}
+
+# calculate difference between two dates in days, hours and minutes
+# order of parameters doesn't matter
+datediff() {
+    # convert input dates to unix timestamps
+    d1=$(date -d "$1" +%s)
+    d2=$(date -d "$2" +%s)
+    # calculate a difference in seconds
+    diff=$(( (d1 - d2) > 0 ? (d1 - d2) : (d2 - d1) ))
+
+    # format and print the difference
+    echo $(( diff / 86400 )) "day(s)" $(( (diff % 86400) / 3600 )) "hour(s)" $(( ((diff % 86400) % 3600) / 60 )) "minute(s)"
+}
