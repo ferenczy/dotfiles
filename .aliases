@@ -28,9 +28,16 @@ alias whence='type -a'                      # where, of a sort
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias egrep='egrep --color=auto'        # show differences in colour
-    alias fgrep='fgrep --color=auto'        # show differences in colour
     alias grep='grep --line-number --color=auto' # show differences in color and display line numbers
+
+    # convert GREP_OPTIONS environment variable to an alias and unset it since it's deprecated
+    if [[ -n ${GREP_OPTIONS+x} ]]; then
+        alias grep='grep $GREP_OPTIONS'         # set GREP_OPTIONS as grep alias
+        unset GREP_OPTIONS
+    fi
+
+    alias egrep='egrep --color=auto'        # show differences in color
+    alias fgrep='fgrep --color=auto'        # show differences in color
 
     alias ls='ls -hF --color=auto'          # all listings in color, classified, human readable
     alias dir='dir --color=auto'
