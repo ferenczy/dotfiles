@@ -10,12 +10,53 @@ mcd () {
 # calculate difference between two dates in days, hours and minutes
 # order of parameters doesn't matter
 datediff() {
+    if [ $# -lt 1 ]; then
+        echo "Computes a difference between the starting and ending date and time in days, hours and minutes."
+        echo "If the second argument is omitted, the current date and time is used as the ending date.\n"
+        echo "Usage: datediff <start> [end]\n"
+        echo 'datediff <hh>[:mm][:ss] <hh>[:mm][:ss]'
+        echo 'datediff "<YYYY-MM-DD> [hh][:mm][:ss]" "<YYYY-MM-DD> [hh][:mm][:ss]"'
+        return
+    fi
+
+    # use the current date and time if second argument is omitted
+    if [ $# -lt 2 ]; then
+        2=`date`
+    fi
+
+    # check if arguments are valid dates
+    d1=$(date -d "$1")
+    if  [ $? -ne 0 ]; then
+        echo 'First argument is not a valid date'
+        return
+    fi
+    d2=$(date -d "$2")
+    if  [ $? -ne 0 ]; then
+        echo 'Second argument is not a valid date'
+        return
+    fi
+
+    # display parsed and normalized dates
+    echo "Start: $d1"
+    echo "End:   $d2"
+    echo
+
     # convert input dates to unix timestamps
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
+
     # calculate a difference in seconds
     diff=$(( (d1 - d2) > 0 ? (d1 - d2) : (d2 - d1) ))
 
     # format and print the difference
-    echo $(( diff / 86400 )) "day(s)" $(( (diff % 86400) / 3600 )) "hour(s)" $(( ((diff % 86400) % 3600) / 60 )) "minute(s)"
+    days=$(( diff / 86400 ))
+    hours=$(( (diff % 86400) / 3600 ))
+    hours_total=$(( diff / 3600 ))
+    minutes=$(( ((diff % 86400) % 3600) / 60 ))
+    seconds=$(( ((diff % 86400) % 3600) % 60 ))
+
+    echo "Difference:  $days day(s) $hours hour(s) $minutes minute(s) $seconds seconds(s)"
+    echo "             $hours_total hour(s) $minutes minute(s) $seconds seconds(s)"
+    echo "             $diff second(s)"
+}
 }
