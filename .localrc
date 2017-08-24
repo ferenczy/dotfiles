@@ -31,10 +31,10 @@ if [[ `uname -o` == 'Cygwin' ]] ; then
 
     # Total Commander
     tc() {
-        # set path to current directory when called without argument
-        [[ -z ${*} ]] && _PATH=. || _PATH=$*
+        # set _DIR to current directory when called without argument
+        [[ -z ${*} ]] && _DIR=. || _DIR=$*
 
-        cygstart "/cygdrive/c/Program Files/totalcmd64/TOTALCMD64.EXE" -T `cygpath -wa "$_PATH"`
-        unset $_PATH
+        cygstart "/cygdrive/c/Program Files/totalcmd9/TOTALCMD64.EXE" -O -T `cygpath -wa "$_DIR"`
+        unset _DIR
     }
 fi
