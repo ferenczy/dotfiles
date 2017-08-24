@@ -1,4 +1,4 @@
-# Dawid Ferenczy 2014
+# Dawid Ferenczy 2014 - 2017
 # http://github.com/ferenczy/dotfiles
 
 # base-files version 4.1-1
@@ -15,8 +15,8 @@ if [ -f "${HOME}/.profile" ] ; then
   source "${HOME}/.profile"
 fi
 
-# source the users bashrc if it exists
-if [ -f "${HOME}/.bashrc" ] ; then
+# if running interactive, source the users .bashrc if it exists
+if [ $- == *i* && -f "${HOME}/.bashrc" ] ; then
   source "${HOME}/.bashrc"
 fi
 
