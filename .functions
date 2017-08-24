@@ -3,6 +3,10 @@ shell () {
   ps -p $$ | tail -1 | awk '{print $NF}'
 }
 
+mcd () {
+    mkdir -p $@ && cd $1 && echo "Created directory \"$@\""
+}
+
 # calculate difference between two dates in days, hours and minutes
 # order of parameters doesn't matter
 datediff() {
