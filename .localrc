@@ -3,10 +3,10 @@
 
 # ~/.localrc: user or machine specific settings.
 
-# Cygwin specific settings
-if [[ `uname -o` == 'Cygwin' ]] ; then
+# Cygwin / Mingw specific settings
+if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]] ; then
     # fix VirtualBox's & Vagrant's HOME to Windows user's profile
-    export VAGRANT_HOME="C:/Users/$USER/.vagrant.d/"
+    export VAGRANT_HOME="d:/data/vagrant/"
     export VBOX_USER_HOME="C:/Users/$USER/.VirtualBox/"
 
     export PATH=$PATH:"/cygdrive/c/Program Files/Oracle/VirtualBox/"
@@ -16,9 +16,6 @@ if [[ `uname -o` == 'Cygwin' ]] ; then
     # disable apt-cyg WPAD (Web Proxy AutoDiscovery)
     export APT_CYG_PROXY=inherit
 
-    # ssh-pageant
-    eval $(/usr/bin/ssh-pageant -ra /tmp/.ssh-pageant)
-
     # Notepad++
     np() {
         cygstart "/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe" `cygpath -wa "$*"`
@@ -26,7 +23,7 @@ if [[ `uname -o` == 'Cygwin' ]] ; then
 
     # Atom Editor
     atom() {
-        cygstart /cygdrive/c/Users/ferenczy/AppData/Local/atom/app-0.158.0/atom.exe `cygpath -wa "$*"`
+        cygstart "/cygdrive/c/Users/ferenczy/AppData/Local/atom/atom.exe" `cygpath -wa "$*"`
     }
 
     # Total Commander
@@ -37,4 +34,17 @@ if [[ `uname -o` == 'Cygwin' ]] ; then
         cygstart "/cygdrive/c/Program Files/totalcmd9/TOTALCMD64.EXE" -O -T `cygpath -wa "$_DIR"`
         unset _DIR
     }
+fi
+
+# Cygwin specific settings
+if [[ `uname -s` == CYGWIN* ]] ; then
+    #export SSH_AUTH_SOCK="/tmp/.ssh-agent"
+
+    # ssh-pageant
+    eval $(/usr/bin/ssh-pageant -ra /tmp/.ssh-pageant)
+fi
+
+# Mingw specific settings
+if [[ `uname -s` == MINGW* ]] ; then
+    export SSH_AUTH_SOCK="/c/Users/ferenczy/.ssh/.ssh-agent"
 fi
