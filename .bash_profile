@@ -11,12 +11,12 @@ export LANG=$(locale -uU)
 export LC_ALL=$(locale -uU)
 
 # source common profile
-if [ -f "${HOME}/.profile" ] ; then
+if [[ -f "${HOME}/.profile" ]]; then
   source "${HOME}/.profile"
 fi
 
 # if running interactive, source the users .bashrc if it exists
-if [ $- == *i* && -f "${HOME}/.bashrc" ] ; then
+if [[ $- == *i* && -f "${HOME}/.bashrc" ]]; then
   source "${HOME}/.bashrc"
 fi
 
@@ -24,7 +24,7 @@ fi
 # PATH="/usr/local/bin:/usr/bin"
 
 # Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/bin" ] ; then
+if [[ -d "${HOME}/bin" ]]; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
