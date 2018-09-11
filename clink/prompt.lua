@@ -15,19 +15,26 @@
 local clink_completions_path = clink.get_env('CLINK_DIR') .. '/../clink-completions/'
 
 function set_prompt_filter()
+    lastExitCode = tonumber(clink.get_env("=ExitCode"))
+
+    if lastExitCode == 0 then
+        statusSign = '\x1b[1;32m✔\x1b[0m';
+    else
+        statusSign = '\x1b[1;31m✗ [' .. lastExitCode .. ']\x1b[0m';
+    end
+
     -- orig: $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m
     -- color codes: "\x1b[1;37;40m"
     -- prompt = "\x1b[1;32;40m{cwd} {git}{hg} \n\x1b[1;30;40m{lamb} \x1b[0m"
-    prompt = "{python_virtualenv}\x1b[0;36m[{datetime}] \x1b[1;36m{username}\x1b[0;35m@\x1b[0;32m{hostname} \x1b[1;33m{cwd}\x1b[0m{git}\n\x1b[0;30;42m$\x1b[0m "
+    prompt = "{last_status}\n\n{python_virtualenv}\x1b[0;36m[{datetime}] \x1b[1;36m{username}\x1b[0;35m@\x1b[0;32m{hostname} \x1b[1;33m{cwd}\x1b[0m{git}\n\x1b[0;30;42m$\x1b[0m "
 
+    prompt = prompt:gsub("{last_status}", statusSign)
     prompt = prompt:gsub("{cwd}", clink.get_cwd())
     prompt = prompt:gsub("{username}", clink.get_env("username"))
     prompt = prompt:gsub("{hostname}", string.lower(os.getenv("computername")))
     prompt = prompt:gsub("{datetime}", os.date("%Y-%m-%d %H:%M:%S"))
     prompt = prompt:gsub("{python_virtualenv}", get_python_virtualenv())
 
-    -- prompt = string.gsub(prompt, "{errorlevel}", os.getenv("errorlevel"))
-    prompt = prompt:gsub("{lamb}", "λ")
     clink.prompt.value = prompt
 end
 
