@@ -22,7 +22,8 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 
-function prompt {
+# - - - define functions - - -
+function global:prompt {
     Write-Host
     Write-Host ("[" + $(Get-Date -UFormat "%Y-%m-%d %H:%M.%S") + "] ") -nonewline -ForegroundColor DarkCyan
     Write-Host $env:username -nonewline -ForegroundColor Cyan
