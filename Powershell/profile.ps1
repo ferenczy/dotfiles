@@ -22,6 +22,13 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 
+
+# - - - configure modules - - -
+# configure PSReadline module
+Set-PSReadlineKeyHandler -Key Tab -Function Complete # bash-like auto-complete
+Set-PSReadlineKeyHandler -Key Alt+Backspace -Function ShellBackwardKillWord
+
+
 # - - - define functions - - -
 function global:prompt {
     Write-Host
