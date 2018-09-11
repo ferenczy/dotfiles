@@ -29,6 +29,11 @@ Set-PSReadlineKeyHandler -Key Tab -Function Complete # bash-like auto-complete
 Set-PSReadlineKeyHandler -Key Alt+Backspace -Function ShellBackwardKillWord
 
 
+# - - - define variables - - -
+# disable automatic addition of Python's virtualenv into prompt as it's implemented in the global:prompt function
+$env:VIRTUAL_ENV_DISABLE_PROMPT = $True
+
+
 # - - - define functions - - -
 function global:prompt {
     $lastCommandStatus = $?
@@ -45,6 +50,9 @@ function global:prompt {
 
     Write-Host $statusSign -ForegroundColor $statusColor
     Write-Host
+    if ($env:VIRTUAL_ENV) {
+        Write-Host "($(split-path $env:VIRTUAL_ENV -leaf)) " -nonewline -ForegroundColor DarkMagenta
+    }
     Write-Host ("[" + $(Get-Date -UFormat "%Y-%m-%d %H:%M.%S") + "] ") -nonewline -ForegroundColor DarkCyan
     Write-Host $env:username -nonewline -ForegroundColor Cyan
     Write-Host "@" -nonewline -ForegroundColor DarkMagenta
