@@ -51,6 +51,7 @@ function global:prompt {
     Write-Host $env:COMPUTERNAME.ToLower() -nonewline -ForegroundColor Green
     Write-Host " " -nonewline
     Write-Host $(Get-Location) -nonewline -ForegroundColor Yellow
+    Write-VcsStatus
     Write-Host
     Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
     [Console]::OutputEncoding = $encoding
