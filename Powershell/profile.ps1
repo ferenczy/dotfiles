@@ -31,6 +31,19 @@ Set-PSReadlineKeyHandler -Key Alt+Backspace -Function ShellBackwardKillWord
 
 # - - - define functions - - -
 function global:prompt {
+    $lastCommandStatus = $?
+    if ($lastCommandStatus) {
+        $statusColor = 'Green'
+        $statusSign = '✔ ';
+    } else {
+        $statusColor = 'Red'
+        $statusSign = '✗ ';
+    }
+
+    $encoding = [Console]::OutputEncoding
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+    Write-Host $statusSign -ForegroundColor $statusColor
     Write-Host
     Write-Host ("[" + $(Get-Date -UFormat "%Y-%m-%d %H:%M.%S") + "] ") -nonewline -ForegroundColor DarkCyan
     Write-Host $env:username -nonewline -ForegroundColor Cyan
@@ -39,6 +52,8 @@ function global:prompt {
     Write-Host " " -nonewline
     Write-Host $(Get-Location) -nonewline -ForegroundColor Yellow
     Write-Host
-    Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor Green
+    Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
+    [Console]::OutputEncoding = $encoding
+
     return " "
 }
