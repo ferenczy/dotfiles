@@ -38,12 +38,14 @@ $env:VIRTUAL_ENV_DISABLE_PROMPT = $True
 # - - - define functions - - -
 function global:prompt {
     $lastCommandStatus = $?
+    $originalLastExitCode = $LastExitCode
+
     if ($lastCommandStatus) {
         $statusColor = 'Green'
         $statusSign = '✔ ';
     } else {
         $statusColor = 'Red'
-        $statusSign = '✗ ';
+        $statusSign = "✗ [$LastExitCode]";
     }
 
     $encoding = [Console]::OutputEncoding
@@ -64,6 +66,8 @@ function global:prompt {
     Write-Host
     Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
     [Console]::OutputEncoding = $encoding
+
+    $LastExitCode = $originalLastExitCode
 
     return " "
 }
