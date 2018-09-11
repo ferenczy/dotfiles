@@ -1,19 +1,26 @@
-# Dawid Ferenczy 2015
+﻿# Dawid Ferenczy 2015 - 2018
 # http://github.com/ferenczy/dotfiles
 #
-# PowerShell profile
+# PowerShell profile "Current User All Hosts"
 #
-# Location: %SystemDrive%\Users\<username>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
-
-# import PowerTab module
-#Import-Module "PowerTab" -ArgumentList "C:\Users\ferenczy\Documents\WindowsPowerShell\PowerTabConfig.xml"
-
-# aliases
-new-item alias:np -value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $null
+# Location: %SystemDrive%\Users\<username>\Documents\WindowsPowerShell\profile.ps1
+#
 
 # print PowerShell and CLR versions
 Write-Host PowerShell $PSVersionTable.PSVersion "|" CLR $PSVersionTable.CLRVersion -ForegroundColor Magenta
 Write-Host
+
+
+# - - - define aliases - - -
+new-item alias:np -value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $null
+new-item alias:atom -value "C:\Users\ferenczy\AppData\Local\atom\atom.exe" > $null
+
+
+# - - - import modules - - -
+Import-Module posh-git
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
 
 function prompt {
     Write-Host
