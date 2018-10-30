@@ -18,9 +18,10 @@ new-item alias:atom -value "C:\Users\ferenczy\AppData\Local\atom\atom.exe" > $nu
 
 # - - - import modules - - -
 Import-Module posh-git
+
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
+    Import-Module "$ChocolateyProfile"
 }
 
 
@@ -51,19 +52,26 @@ function global:prompt {
     $encoding = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
+    # print last command's status and exit code
     Write-Host $statusSign -ForegroundColor $statusColor
     Write-Host
+    # print Python virtualenv, if active
     if ($env:VIRTUAL_ENV) {
         Write-Host "($(split-path $env:VIRTUAL_ENV -leaf)) " -nonewline -ForegroundColor DarkMagenta
     }
+    # print current date and time
     Write-Host ("[" + $(Get-Date -UFormat "%Y-%m-%d %H:%M.%S") + "] ") -nonewline -ForegroundColor DarkCyan
+    # print username
     Write-Host $env:username -nonewline -ForegroundColor Cyan
     Write-Host "@" -nonewline -ForegroundColor DarkMagenta
+    # print hostname
     Write-Host $env:COMPUTERNAME.ToLower() -nonewline -ForegroundColor Green
     Write-Host " " -nonewline
+    # print current working directory
     Write-Host $(Get-Location) -nonewline -ForegroundColor Yellow
     Write-VcsStatus
     Write-Host
+    # print prompt sign in color according to last command's status
     Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
     [Console]::OutputEncoding = $encoding
 
