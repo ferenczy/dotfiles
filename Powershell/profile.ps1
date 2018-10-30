@@ -29,6 +29,13 @@ if (Test-Path($ChocolateyProfile)) {
 # configure PSReadline module
 Set-PSReadlineKeyHandler -Key Tab -Function Complete # bash-like auto-complete
 Set-PSReadlineKeyHandler -Key Alt+Backspace -Function ShellBackwardKillWord
+Set-PSReadLineOption –HistoryNoDuplicates:$True
+Set-PSReadLineOption -ExtraPromptLineCount:5
+Set-PSReadLineOption -ShowToolTips:$True #show tooltips in the list of completions
+
+# forward and backward history search using the text already entered before the cursor
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 
 # - - - define variables - - -
