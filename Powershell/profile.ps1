@@ -57,7 +57,9 @@ function global:prompt {
 
     # print last command's status and exit code
     Write-Host $statusSign -ForegroundColor $statusColor
-    Write-Host
+    # print horizontal line
+    Write-Host ("_" * $Host.UI.RawUI.WindowSize.Width) -ForegroundColor DarkBlue
+
     # print Python virtualenv, if active
     if ($env:VIRTUAL_ENV) {
         Write-Host "($(split-path $env:VIRTUAL_ENV -leaf)) " -nonewline -ForegroundColor DarkMagenta
