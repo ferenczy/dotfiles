@@ -76,8 +76,14 @@ function global:prompt {
     Write-Host
     # print prompt sign in color according to last command's status
     Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
-    [Console]::OutputEncoding = $encoding
 
+    # set console window title to current working directory
+    if (-Not $global:originalWindowTitle) {
+        $global:originalWindowTitle = $Host.UI.RawUI.WindowTitle
+    }
+    $Host.UI.RawUI.WindowTitle = "[$global:originalWindowTitle] $(Get-Location)"
+
+    [Console]::OutputEncoding = $encoding
     $LastExitCode = $originalLastExitCode
 
     return " "
