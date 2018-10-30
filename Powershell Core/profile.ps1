@@ -17,7 +17,8 @@ new-item alias:atom -value "C:\Users\ferenczy\AppData\Local\atom\atom.exe" > $nu
 
 
 # - - - import modules - - -
-#Import-Module posh-git
+Import-Module posh-git
+
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
@@ -68,7 +69,7 @@ function global:prompt {
     Write-Host " " -nonewline
     # print current working directory
     Write-Host $(Get-Location) -nonewline -ForegroundColor Yellow
-    # Write-VcsStatus
+    Write-VcsStatus
     Write-Host
     # print prompt sign in color according to last command's status
     Write-Host "$" -nonewline -ForegroundColor Black -BackgroundColor $statusColor
