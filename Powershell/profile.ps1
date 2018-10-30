@@ -48,16 +48,12 @@ function global:prompt {
     $lastCommandStatus = $?
     $originalLastExitCode = $LastExitCode
 
-    if ($lastCommandStatus) {
-        $statusColor = 'Green'
-        $statusSign = '✔ ';
-    } else {
-        $statusColor = 'Red'
-        $statusSign = "✗ [$LastExitCode]";
-    }
-
     $encoding = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+    # set status sign and color according to last command's exit code
+    $statusSign = if ($lastCommandStatus)  { '✔' } else { "✗ [$LastExitCode]" }
+    $statusColor = if ($lastCommandStatus) { 'Green' } else { 'Red' }
 
     # print last command's status and exit code
     Write-Host $statusSign -ForegroundColor $statusColor
