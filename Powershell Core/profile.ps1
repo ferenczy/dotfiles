@@ -55,8 +55,16 @@ function global:prompt {
     $statusSign = if ($lastCommandStatus)  { '✔' } else { "✗ [$LastExitCode]" }
     $statusColor = if ($lastCommandStatus) { 'Green' } else { 'Red' }
 
-    # print last command's status and exit code
-    Write-Host $statusSign -ForegroundColor $statusColor
+    # get previously executed command, will be Null if it's freshly opened shell
+    $lastCommand = Get-History -Count 1
+    # print last command's status, exit code and time taken
+    if ($lastCommand) {
+        Write-Host $statusSign -ForegroundColor $statusColor -nonewline
+
+        $timeTaken = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime)
+        Write-Host " (took $(formatTimeTaken($timeTaken)) s)" -ForegroundColor Magenta
+    }
+
     # print horizontal line
     Write-Host ("_" * $Host.UI.RawUI.WindowSize.Width) -ForegroundColor DarkBlue
 
@@ -89,4 +97,14 @@ function global:prompt {
     $LastExitCode = $originalLastExitCode
 
     return " "
+}
+
+function formatTimeTaken {
+    Param($timeTaken)
+
+    $format = if ($timeTaken.TotalSeconds -le 60) { "s\.fff" } else {
+        if ($timeTaken.TotalMinutes -le 60) { "m\:ss\.fff" } else { "h\:mm\:ss\.fff" }
+    }
+
+    return $timeTaken.ToString($format)
 }
