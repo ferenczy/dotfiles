@@ -15,12 +15,23 @@
 local clink_completions_path = clink.get_env('CLINK_DIR') .. '/../clink-completions/'
 
 function set_prompt_filter()
-    lastExitCode = tonumber(clink.get_env("=ExitCode"))
+    -- get the exit code of the previous command
+    lastExitCode = clink.get_env("=ExitCode")
 
+    -- if it's not nil, convert it from HEX to DEC
+    if tonumber(lastExitCode, 16) ~= nil then
+        lastExitCode = tonumber(lastExitCode, 16)
+    end
+
+    -- previous command was successful
     if lastExitCode == 0 then
-        statusSign = '\x1b[1;32m✔\x1b[0m';
+        statusSign = '\x1b[1;32m✔\x1b[0m'
+    -- previous command didn't return any exit code
+    elseif lastExitCode == nil then
+        statusSign = '\x1b[1;33m?\x1b[0m'
+    -- previous command returned an error code
     else
-        statusSign = '\x1b[1;31m✗ [' .. lastExitCode .. ']\x1b[0m';
+        statusSign = '\x1b[1;31m✗ [' .. lastExitCode .. ']\x1b[0m'
     end
 
     -- orig: $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m
