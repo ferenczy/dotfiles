@@ -13,7 +13,6 @@ Write-Host
 
 # - - - define aliases - - -
 new-item alias:np -value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $null
-new-item alias:atom -value "C:\Users\ferenczy\AppData\Local\atom\atom.exe" > $null
 
 
 # - - - import modules - - -
