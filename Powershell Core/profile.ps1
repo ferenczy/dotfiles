@@ -12,7 +12,7 @@ Write-Host
 
 
 # - - - define aliases - - -
-new-item alias:np -value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $null
+new-item alias:np -Force -Value "c:\Program Files (x86)\Notepad++\notepad++.exe" > $null
 
 
 # - - - import modules - - -
