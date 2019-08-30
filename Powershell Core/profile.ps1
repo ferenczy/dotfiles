@@ -28,6 +28,7 @@ if (Test-Path($ChocolateyProfile)) {
 # configure PSReadline module
 Set-PSReadlineKeyHandler -Key Tab -Function Complete # bash-like auto-complete
 Set-PSReadlineKeyHandler -Key Alt+Backspace -Function ShellBackwardKillWord
+Set-PSReadlineKeyHandler -Key Ctrl+d -Function ViExit # alternatively DeleteCharOrExit
 Set-PSReadLineOption –HistoryNoDuplicates:$True
 Set-PSReadLineOption -ExtraPromptLineCount:5
 Set-PSReadLineOption -ShowToolTips:$True #show tooltips in the list of completions
