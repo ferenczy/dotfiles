@@ -67,7 +67,10 @@ function global:prompt {
         Write-Host $statusSign -ForegroundColor $statusColor -nonewline
 
         $timeTaken = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime)
-        Write-Host " (took $(formatTimeTaken($timeTaken)) s)" -ForegroundColor Magenta
+        $timeTakenMsg = " (took $(formatTimeTaken($timeTaken)) s" +
+            ", finished on $($lastCommand.EndExecutionTime.ToString('yyyy-MM-dd'))" +
+            " at $($lastCommand.EndExecutionTime.ToString('HH:mm.ss')))"
+        Write-Host $timeTakenMsg -ForegroundColor Magenta
     }
 
     # print horizontal line
