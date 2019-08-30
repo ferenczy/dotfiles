@@ -107,3 +107,7 @@ function formatTimeTaken {
 
     return $timeTaken.ToString($format)
 }
+
+function path {
+    echo $env:PATH.split(';')
+}
