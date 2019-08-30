@@ -58,7 +58,7 @@ function global:prompt {
 
     # set status sign and color according to last command's exit code
     $statusSign = if ($lastCommandStatus)  { '✔' } else { "✗ [$LastExitCode]" }
-    $statusColor = if ($lastCommandStatus) { 'Green' } else { 'Red' }
+    $statusColor = if ($lastCommandStatus) { [ConsoleColor]::Green } else { [ConsoleColor]::Red }
 
     # get previously executed command, will be Null if it's freshly opened shell
     $lastCommand = Get-History -Count 1
