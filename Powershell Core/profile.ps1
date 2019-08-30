@@ -37,8 +37,13 @@ Set-PSReadLineOption -ShowToolTips:$True #show tooltips in the list of completio
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
+# configure posh-git
+$GitPromptSettings.BeforeText = '  '
+$GitPromptSettings.BeforeForegroundColor = [ConsoleColor]::Magenta
+$GitPromptSettings.AfterText = ''
+$GitPromptSettings.BranchForegroundColor = [ConsoleColor]::Magenta
 
-# - - - define variables - - -
+# - - - define environment variables - - -
 # disable automatic addition of Python's virtualenv into prompt as it's implemented in the global:prompt function
 $env:VIRTUAL_ENV_DISABLE_PROMPT = $True
 
