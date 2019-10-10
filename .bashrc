@@ -173,22 +173,12 @@ if [[ -f "${HOME}/.aliases" ]]; then
   source "${HOME}/.aliases"
 fi
 
-# Bash specific aliases
-# if [ -f "${HOME}/.bash_aliases" ]; then
-#   source "${HOME}/.bash_aliases"
-# fi
-
 
 # - - - - - Functions - - - - -
 
 # Common functions
 if [[ -f "${HOME}/.functions" ]]; then
   source "${HOME}/.functions"
-fi
-
-# Some people use a different file for functions
-if [[ -f "${HOME}/.bash_functions" ]]; then
-  source "${HOME}/.bash_functions"
 fi
 
 
