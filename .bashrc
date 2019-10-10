@@ -1,4 +1,4 @@
-# Dawid Ferenczy 2014 - 2017
+# Dawid Ferenczy 2014 - 2019
 # http://github.com/ferenczy/dotfiles
 
 # base-files version 4.1-1
@@ -88,14 +88,43 @@ BBCK="\[\033[40m\]" # background black
 # update prompt according to the last command status
 update_prompt ()
 {
-    STATUS=$?
+    # store last command exit code
+    local STATUS=$?
+
+    local LAST_COMMAND_DURATION=$(calculate_last_command_duration)
+
+    # detect if this is the first time prompt is printed in the current session
+    local FIRST_RUN=false
+    if [ -z ${PROMPT_INITIALIZED+x} ]; then
+        FIRST_RUN=true
+        PROMPT_INITIALIZED=true
+    fi
+
+    # set prompt sign color (green if the last command was successful, otherwise red) and the last command status sign
+    local STATUS_COLOR
+    local STATUS_CHAR
+    if [[ $STATUS -eq 0 ]]; then
+        STATUS_COLOR="${FGRN}"
+        STATUS_CHAR="✔"
+    else
+        STATUS_COLOR="${FRED}"
+        STATUS_CHAR="✘"
+    fi
 
     # reset colors
     PS1="${RST}"
 
-    # display last command's status code, if it's not 0
-    if [[ $STATUS -ne 0 ]]; then
-        PS1+="${FRED}${HI}[${STATUS}]${RST}\n"
+    if [ $FIRST_RUN == false ]; then
+        # print the last command status character
+        PS1+="${STATUS_COLOR}${HI}${STATUS_CHAR}${RST}"
+
+        # print the last command's status code, if it's not 0
+        if [[ $STATUS -ne 0 ]]; then
+            PS1+=" ${FRED}${HI}[${STATUS}]${RST}"
+        fi
+
+        # print the last command duration
+        PS1+=" ${FMAG}${HI}(${LAST_COMMAND_DURATION})${RST}\n"
     fi
 
     # empty line after last output, date and time
@@ -115,13 +144,6 @@ update_prompt ()
         PS1+="${HI}${FMAG}$(__git_ps1 ' (%s)')${RST}"
     fi
 
-    # set prompt sign color (green if the last command was successful, otherwise red)
-    if [[ $STATUS -eq 0 ]]; then
-        STATUS_COLOR="${FGRN}"
-    else
-        STATUS_COLOR="${FRED}"
-    fi
-
     # prompt sign
     PS1+="\n${STATUS_COLOR}${BBCK}${HI}${INV}\$${RST} "
 
@@ -130,9 +152,53 @@ update_prompt ()
         cygwin|xterm*)
             PS1+="\[\033]0;\w\007\]"
     esac
+
+    # write history to the disk
+    # history -a
 }
 
 PROMPT_COMMAND="update_prompt"
+
+calculate_last_command_duration() {
+    # only continue if the start time has been recorded
+    [[ -z $COMMAND_EXECUTION_TIME_START ]] && return
+
+    # calculate how many milliseconds the last command took
+    local COMMAND_EXECUTION_TIME_END=$(($(date +%s%N)/1000000))
+    local DURATION_MS=$(( $COMMAND_EXECUTION_TIME_END - $COMMAND_EXECUTION_TIME_START ))
+
+    # convert milliseconds into hours, minutes, seconds and milliseconds
+    local DURATION_TEXT
+    local HOURS=$((DURATION_MS / 1000 / 60 / 60))
+    local MINUTES=$((DURATION_MS / 1000 / 60 % 60))
+    local SECONDS=$((DURATION_MS / 1000 % 60))
+    local MS=$(printf '%03d' $((DURATION_MS % 1000)))
+
+    # construct duration text in format [[h:]m:]s.ms
+    (( $HOURS > 0 )) && DURATION_TEXT+="$HOURS:"
+    (( $MINUTES > 0 )) && DURATION_TEXT+="$MINUTES:"
+
+    # get last command end date and time
+    local END_TIME_SEC=$((COMMAND_EXECUTION_TIME_END / 1000))
+    local COMMAND_END_DATE=$(date -d @$END_TIME_SEC +%F)
+    local COMMAND_END_TIME=$(date -d @$END_TIME_SEC +%T)
+
+    # construct final string
+    DURATION_TEXT+="took $SECONDS.$MS s, finished on $COMMAND_END_DATE at $COMMAND_END_TIME"
+
+    unset COMMAND_EXECUTION_TIME_START
+
+    echo $DURATION_TEXT
+}
+
+# store start time of every command executed
+preexec_capture_start_time () {
+    [ -n "$COMP_LINE" ] && return  # do nothing if completing
+    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+
+    COMMAND_EXECUTION_TIME_START=$(($(date +%s%N)/1000000))
+}
+trap 'preexec_capture_start_time' DEBUG
 
 
 # - - - - - History Options - - - - -
@@ -152,9 +218,6 @@ HISTFILESIZE=2000
 # The '&' is a special pattern which suppresses duplicate entries.
 # export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:l[als]:pwd' # Ignore the ls command as well
-
-# Whenever displaying the prompt, write the previous line to disk
-export -n PROMPT_COMMAND+="; history -a"
 
 
 # - - - - - Umask - - - - -
