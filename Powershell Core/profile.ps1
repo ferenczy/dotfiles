@@ -1,4 +1,4 @@
-﻿# Dawid Ferenczy 2015 - 2018
+﻿# Dawid Ferenczy 2015 - 2019
 # http://github.com/ferenczy/dotfiles
 #
 # PowerShell 6 Core profile "Current User All Hosts"
@@ -50,9 +50,11 @@ $env:VIRTUAL_ENV_DISABLE_PROMPT = $True
 
 # - - - define functions - - -
 function global:prompt {
+    # capture status and exit code of the previously executed command
     $lastCommandStatus = $?
     $originalLastExitCode = $LastExitCode
 
+    # save current console encoding and set it to UTF-8
     $encoding = [Console]::OutputEncoding
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
@@ -62,18 +64,21 @@ function global:prompt {
 
     # get previously executed command, will be Null if it's freshly opened shell
     $lastCommand = Get-History -Count 1
-    # print last command's status, exit code and time taken
+    # if there's any previously executed command
     if ($lastCommand) {
+        # print last command's status and exit code
         Write-Host $statusSign -ForegroundColor $statusColor -nonewline
 
+        # calculate the time taken by the execution of the previous command
         $timeTaken = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime)
         $timeTakenMsg = " (took $(formatTimeTaken($timeTaken)) s" +
             ", finished on $($lastCommand.EndExecutionTime.ToString('yyyy-MM-dd'))" +
             " at $($lastCommand.EndExecutionTime.ToString('HH:mm.ss')))"
+        # print the time taken by the execution of the previous command
         Write-Host $timeTakenMsg -ForegroundColor Magenta
     }
 
-    # print horizontal line
+    # print a horizontal line over the full width of the console
     Write-Host ("_" * $Host.UI.RawUI.WindowSize.Width) -ForegroundColor DarkBlue
 
     # print Python virtualenv, if active
@@ -101,12 +106,14 @@ function global:prompt {
     }
     $Host.UI.RawUI.WindowTitle = "[$global:originalWindowTitle] $(Get-Location)"
 
+    # restore the original console encoding and the previous command's exit code
     [Console]::OutputEncoding = $encoding
     $LastExitCode = $originalLastExitCode
 
     return " "
 }
 
+# format timestamp as a human-readable string ([[h:]m:]s.fff)
 function formatTimeTaken {
     Param($timeTaken)
 
@@ -117,6 +124,7 @@ function formatTimeTaken {
     return $timeTaken.ToString($format)
 }
 
+# print PATH environment variable split by new lines
 function path {
     echo $env:PATH.split(';')
 }
