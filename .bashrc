@@ -252,3 +252,6 @@ fi
 if [[ -f "${HOME}/.localrc" ]]; then
   source "${HOME}/.localrc"
 fi
+
+# add "bin" directory in user's home to the PATH
+export PATH=$PATH:~/bin
