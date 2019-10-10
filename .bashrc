@@ -125,6 +125,9 @@ update_prompt ()
 
         # print the last command duration
         PS1+=" ${FMAG}${HI}(${LAST_COMMAND_DURATION})${RST}\n"
+
+        # print a horizontal line over the full width of the console
+        PS1+="${FBLU}$(printf '%*s\n' "$(tput cols)" | tr ' ' -)\n"
     fi
 
     # empty line after last output, date and time
