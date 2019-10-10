@@ -131,6 +131,7 @@ update_prompt ()
     PS1+="\n${FCYN}[\D{%Y-%m-%d %H:%M.%S}]${RST} "
 
     # different color for SSH connections
+    local HOST_COLOR=""
     if [[ $SSH_CLIENT ]]; then
         HOST_COLOR=$HI
     fi
