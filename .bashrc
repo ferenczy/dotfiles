@@ -168,7 +168,7 @@ calculate_last_command_duration() {
     [[ -z $COMMAND_EXECUTION_TIME_START ]] && return
 
     # calculate how many milliseconds the last command took
-    local COMMAND_EXECUTION_TIME_END=$(($(date +%s%N)/1000000))
+    local COMMAND_EXECUTION_TIME_END=$(date +%s%3N)
     local DURATION_MS=$(( $COMMAND_EXECUTION_TIME_END - $COMMAND_EXECUTION_TIME_START ))
 
     # convert milliseconds into hours, minutes, seconds and milliseconds
@@ -200,7 +200,7 @@ preexec_capture_start_time () {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
     [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
 
-    COMMAND_EXECUTION_TIME_START=$(($(date +%s%N)/1000000))
+    COMMAND_EXECUTION_TIME_START=$(date +%s%3N)
 }
 trap 'preexec_capture_start_time' DEBUG
 
