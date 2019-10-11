@@ -198,7 +198,7 @@ calculate_last_command_duration() {
 # store start time of every command executed
 preexec_capture_start_time () {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
-    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+    [[ "$BASH_COMMAND" =~ "$PROMPT_COMMAND" ]] && return # don't cause a preexec for $PROMPT_COMMAND
 
     COMMAND_EXECUTION_TIME_START=$(date +%s%3N)
 }
