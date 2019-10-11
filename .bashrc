@@ -172,13 +172,13 @@ calculate_last_command_duration() {
     local DURATION_MS=$(( $COMMAND_EXECUTION_TIME_END - $COMMAND_EXECUTION_TIME_START ))
 
     # convert milliseconds into hours, minutes, seconds and milliseconds
-    local DURATION_TEXT
     local HOURS=$((DURATION_MS / 1000 / 60 / 60))
     local MINUTES=$((DURATION_MS / 1000 / 60 % 60))
     local SECONDS=$((DURATION_MS / 1000 % 60))
     local MS=$(printf '%03d' $((DURATION_MS % 1000)))
 
     # construct duration text in format [[h:]m:]s.ms
+    local DURATION_TEXT='took '
     (( $HOURS > 0 )) && DURATION_TEXT+="$HOURS:"
     (( $MINUTES > 0 )) && DURATION_TEXT+="$MINUTES:"
 
@@ -188,7 +188,7 @@ calculate_last_command_duration() {
     local COMMAND_END_TIME=$(date -d @$END_TIME_SEC +%T)
 
     # construct final string
-    DURATION_TEXT+="took $SECONDS.$MS s, finished on $COMMAND_END_DATE at $COMMAND_END_TIME"
+    DURATION_TEXT+="$SECONDS.$MS s, finished on $COMMAND_END_DATE at $COMMAND_END_TIME"
 
     unset COMMAND_EXECUTION_TIME_START
 
