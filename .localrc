@@ -1,10 +1,13 @@
-# Dawid Ferenczy 2014
+# Dawid Ferenczy 2014 - 2019
 # http://github.com/ferenczy/dotfiles
 
 # ~/.localrc: user or machine specific settings.
 
 # Cygwin / Mingw specific settings
 if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]] ; then
+    # auto-complete executables without .exe extension
+    shopt -s completion_strip_exe
+
     # fix VirtualBox's & Vagrant's HOME to Windows user's profile
     export VAGRANT_HOME="d:/data/vagrant/"
     export VBOX_USER_HOME="C:/Users/$USER/.VirtualBox/"
@@ -48,3 +51,5 @@ fi
 if [[ `uname -s` == MINGW* ]] ; then
     export SSH_AUTH_SOCK="/c/Users/ferenczy/.ssh/.ssh-agent"
 fi
+
+source ~/.azure-cli/az.completion
