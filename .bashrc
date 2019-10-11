@@ -111,7 +111,7 @@ update_prompt ()
     # reset colors
     PS1="${RST}"
 
-    if [ $FIRST_RUN == false ]; then
+    if [[ $FIRST_RUN == false ]]; then
         # print the last command status character
         PS1+="${STATUS_COLOR}${HI}${STATUS_CHAR}${RST}"
 
