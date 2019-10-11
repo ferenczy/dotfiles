@@ -37,6 +37,19 @@ if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]] ; then
         cygstart "/cygdrive/c/Program Files/totalcmd9/TOTALCMD64.EXE" -O -T `cygpath -wa "$_DIR"`
         unset _DIR
     }
+
+    kdiff() {
+        cygstart "/cygdrive/c/Program Files/KDiff3/kdiff3.exe" `cygpath -wap $*`
+    }
+
+    winmerge() {
+        cygstart "/cygdrive/c/Program Files (x86)/WinMerge/WinMergeU.exe" `cygpath -wap $*`
+    }
+
+    cygpathtest () {
+        echo Params: $*
+        echo `cygpath -wap $*`
+    }
 fi
 
 # Cygwin specific settings
