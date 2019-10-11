@@ -203,6 +203,8 @@ preexec_capture_start_time () {
     COMMAND_EXECUTION_TIME_START=$(date +%s%3N)
 }
 trap 'preexec_capture_start_time' DEBUG
+# reset timer when Ctrl + C is pressed and no command has been running
+trap 'preexec_capture_start_time' SIGINT
 
 
 # - - - - - History Options - - - - -
