@@ -1,5 +1,5 @@
 # display last command's status code, if it's not 0
-PROMPT=$'%{$reset_color%}%(?:%{$fg_bold[green]%}✔ :%{$fg_bold[red]%}✗ [$?])%{$reset_color%}\n'
+PROMPT=$'%{$reset_color%}%(?:%{$fg_bold[green]%}✔:%{$fg_bold[red]%}✘ [$?])%{$reset_color%}'
 
 # put a horizontal line between commands
 PROMPT+=$'\n%{$fg[blue]%}${(r:$COLUMNS::_:)}%{$reset_color%}\n\n'
@@ -14,15 +14,15 @@ else
     host_color=$fg[magenta]
 fi
 
-# username@hostname working_directory (git_branch)
+# username@hostname working_directory Git_status
 PROMPT+=$'%{$fg_bold[cyan]%}%n%{$reset_color%}%{$host_color%}@%{$fg_bold[green]%}%m%{$reset_color%} %{$fg_bold[yellow]%}%~%{$reset_color%}$(git_prompt_info)'
 
 # prompt sign (green if the last command was successful, otherwise red)
 PROMPT+=$'\n%{$bg[black]%}%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})%{\e[7m%}\$%{$reset_color%} '
 
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg_bold[magenta]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[magenta]%})%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg_bold[magenta]%} "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗ %{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔ %{$reset_color%}"
