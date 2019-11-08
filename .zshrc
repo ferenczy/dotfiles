@@ -67,7 +67,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bower extract gem git github knife node nvm pip screen zsh-syntax-highlighting vagrant)
+plugins=(bower colored-man-pages colorize composer extract gem git git-extras knife node nvm pip screen vagrant virtualenv web-search zsh-autosuggestions zsh-syntax-highlighting)
 
 # source Prezto
 if [[ "$ZSH_FRAMEWORK" == "zprezto" && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
