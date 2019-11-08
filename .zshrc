@@ -105,23 +105,27 @@ setopt HIST_VERIFY                 # Don't execute immediately upon history expa
 # setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 # zsh Syntax Highlighting
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-ZSH_HIGHLIGHT_STYLES[alias]='fg=black,bg=cyan'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=yellow,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold'
-ZSH_HIGHLIGHT_STYLES[command]='fg=black,bg=white'
-ZSH_HIGHLIGHT_STYLES[function]='fg=black,bg=green'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue,bold'
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=black,bg=yellow'
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=black,bg=magenta'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=magenta,bold'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=magenta'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,bg=red'
-
+if [[ -n ${ZSH_HIGHLIGHT_STYLES} ]]; then
+    typeset -A ZSH_HIGHLIGHT_STYLES
+    ZSH_HIGHLIGHT_STYLES[alias]='fg=black,bg=cyan'
+    ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
+    ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=white,bold'
+    ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold'
+    ZSH_HIGHLIGHT_STYLES[command]='fg=black,bg=white'
+    ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow,bold'
+    ZSH_HIGHLIGHT_STYLES[function]='fg=black,bg=green'
+    ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=black,bg=yellow'
+    ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,bold'
+    ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=black,bg=magenta'
+    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=magenta,bold'
+    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=magenta'
+    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+    ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,bg=red'
+fi
 
 # - - - - - Aliases - - - - -
 
