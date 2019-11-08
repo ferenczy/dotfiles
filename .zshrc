@@ -1,4 +1,4 @@
-# Dawid Ferenczy 2014 - 2017
+# Dawid Ferenczy 2014 - 2019
 # http://github.com/ferenczy/dotfiles
 
 # .zshrc: Z shell configuration files
@@ -66,7 +66,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(bower extract gem git github knife node nvm pip screen zsh-syntax-highlighting vagrant)
 
-# Source Prezto
+# source Prezto
 if [[ "$ZSH_FRAMEWORK" == "zprezto" && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
