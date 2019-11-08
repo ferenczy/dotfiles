@@ -66,7 +66,15 @@ HIST_STAMPS="dd.mm.yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(bower extract gem git github knife node nvm pip screen zsh-syntax-highlighting vagrant)
 
-source $ZSH/oh-my-zsh.sh
+# Source Prezto
+if [[ "$ZSH_FRAMEWORK" == "zprezto" && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# source oh-my-zsh
+if [[ "$ZSH_FRAMEWORK" == "oh-my-zsh" && -s "$ZSH/oh-my-zsh.sh" ]]; then
+  source $ZSH/oh-my-zsh.sh
+fi
 
 
 # - - - - - User configuration - - - - -
