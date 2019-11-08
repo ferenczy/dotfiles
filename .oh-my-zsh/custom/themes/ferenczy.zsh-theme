@@ -1,6 +1,9 @@
 # display last command's status code, if it's not 0
 PROMPT=$'%{$reset_color%}%(?:%{$fg_bold[green]%}✔:%{$fg_bold[red]%}✘ [$?])%{$reset_color%}'
 
+# print duration of the previous command
+PROMPT+=$'%{$fg_bold[magenta]%}$COMMAND_EXECUTION_TIME_DURATION_TEXT%{$reset_color%}'
+
 # put a horizontal line between commands
 PROMPT+=$'\n%{$fg[blue]%}${(r:$COLUMNS::_:)}%{$reset_color%}\n\n'
 

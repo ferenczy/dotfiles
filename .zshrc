@@ -33,6 +33,9 @@ setopt HASH_CMDS
 # Allow comments even in an interactive shell
 setopt INTERACTIVE_COMMENTS
 
+# Enable substitution of parameters inside the prompt each time it's printed
+setopt PROMPTSUBST
+
 
 # - - - - - Auto-completion settings - - - - -
 
@@ -149,3 +152,27 @@ fi
 if [[ -f "${HOME}/.localrc" ]]; then
   source "${HOME}/.localrc"
 fi
+
+
+
+add-zsh-hook preexec execution_timer_preexec_hook
+add-zsh-hook precmd execution_timer_precmd_hook
+
+# Execution time start
+execution_timer_preexec_hook() {
+    COMMAND_EXECUTION_TIME_START=$(date +%s)
+}
+
+# Execution time end
+execution_timer_precmd_hook() {
+    [[ $SPACESHIP_EXEC_TIME_SHOW == false ]] && return
+    [[ -n $COMMAND_EXECUTION_TIME_DURATION ]] && unset COMMAND_EXECUTION_TIME_DURATION
+    # only continue if the start time has been recorded
+    [[ -z $COMMAND_EXECUTION_TIME_START ]] && return
+    local COMMAND_EXECUTION_TIME_STOP=$(date +%s)
+    local COMMAND_EXECUTION_TIME_DURATION=$(( $COMMAND_EXECUTION_TIME_STOP - $COMMAND_EXECUTION_TIME_START ))
+    unset COMMAND_EXECUTION_TIME_START
+
+    COMMAND_EXECUTION_TIME_DURATION_TEXT=" (took $COMMAND_EXECUTION_TIME_DURATION s)"
+}
+
