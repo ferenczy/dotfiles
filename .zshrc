@@ -154,13 +154,13 @@ if [[ -f "${HOME}/.localrc" ]]; then
 fi
 
 
-
+# Install hooks to measure and calculate time taken by each command executed
 add-zsh-hook preexec execution_timer_preexec_hook
 add-zsh-hook precmd execution_timer_precmd_hook
 
 # Execution time start
 execution_timer_preexec_hook() {
-    COMMAND_EXECUTION_TIME_START=$(date +%s)
+    COMMAND_EXECUTION_TIME_START=$(date +%s%3N)
 }
 
 # Execution time end
@@ -169,10 +169,32 @@ execution_timer_precmd_hook() {
     [[ -n $COMMAND_EXECUTION_TIME_DURATION ]] && unset COMMAND_EXECUTION_TIME_DURATION
     # only continue if the start time has been recorded
     [[ -z $COMMAND_EXECUTION_TIME_START ]] && return
-    local COMMAND_EXECUTION_TIME_STOP=$(date +%s)
-    local COMMAND_EXECUTION_TIME_DURATION=$(( $COMMAND_EXECUTION_TIME_STOP - $COMMAND_EXECUTION_TIME_START ))
+
+    # calculate how many milliseconds the last command took
+    local COMMAND_EXECUTION_TIME_END=$(date +%s%3N)
+    local DURATION_MS=$(( $COMMAND_EXECUTION_TIME_END - $COMMAND_EXECUTION_TIME_START ))
+
+    # convert milliseconds into hours, minutes, seconds and milliseconds
+    local HOURS=$((DURATION_MS / 1000 / 60 / 60))
+    local MINUTES=$((DURATION_MS / 1000 / 60 % 60))
+    local SECONDS=$((DURATION_MS / 1000 % 60))
+    local MS=$(printf '%03d' $((DURATION_MS % 1000)))
+
+    # construct duration text in format [[h:]m:]s.ms
+    local DURATION_TEXT='took '
+    (( $HOURS > 0 )) && DURATION_TEXT+="$HOURS:"
+    (( $MINUTES > 0 )) && DURATION_TEXT+="$MINUTES:"
+
+    # get last command end date and time
+    local END_TIME_SEC=$((COMMAND_EXECUTION_TIME_END / 1000))
+    local COMMAND_END_DATE=$(date -d @$END_TIME_SEC +%F)
+    local COMMAND_END_TIME=$(date -d @$END_TIME_SEC +%T)
+
+    # construct final string
+    DURATION_TEXT+="$SECONDS.$MS s, finished on $COMMAND_END_DATE at $COMMAND_END_TIME"
+
     unset COMMAND_EXECUTION_TIME_START
 
-    COMMAND_EXECUTION_TIME_DURATION_TEXT=" (took $COMMAND_EXECUTION_TIME_DURATION s)"
+    COMMAND_EXECUTION_TIME_DURATION_TEXT=" (took $DURATION_TEXT)"
 }
 
