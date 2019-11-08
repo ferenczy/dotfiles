@@ -121,10 +121,10 @@ update_prompt ()
         fi
 
         # print the last command duration
-        PS1+=" ${FMAG}${HI}(${LAST_COMMAND_DURATION})${RST}\n"
+        [[ -n $LAST_COMMAND_DURATION ]] && PS1+=" ${FMAG}${HI}(${LAST_COMMAND_DURATION})${RST}"
 
         # print a horizontal line over the full width of the console
-        PS1+="${FBLU}$(printf '%*s\n' "$(tput cols)" | tr ' ' -)\n"
+        PS1+="\n${FBLU}$(printf '%*s\n' "$(tput cols)" | tr ' ' -)\n"
     fi
 
     # empty line after last output, date and time
@@ -193,15 +193,18 @@ calculate_last_command_duration() {
 }
 
 # store start time of every command executed
-preexec_capture_start_time () {
+preexec_capture_start_time() {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
     [[ "$BASH_COMMAND" =~ "$PROMPT_COMMAND" ]] && return # don't cause a preexec for $PROMPT_COMMAND
 
     COMMAND_EXECUTION_TIME_START=$(date +%s%3N)
 }
+preexec_reset_start_time() {
+    unset COMMAND_EXECUTION_TIME_START
+}
 trap 'preexec_capture_start_time' DEBUG
 # reset timer when Ctrl + C is pressed and no command has been running
-trap 'preexec_capture_start_time' SIGINT
+trap 'preexec_reset_start_time' SIGINT
 
 
 # - - - - - History Options - - - - -
