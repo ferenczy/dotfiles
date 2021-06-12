@@ -123,6 +123,9 @@ function global:prompt {
     return " "
 }
 
+
+# - - - - - Function Definitions - - - - -
+
 # format timestamp as a human-readable string ([[h:]m:]s.fff)
 function formatTimeTaken {
     Param($timeTaken)
@@ -137,4 +140,16 @@ function formatTimeTaken {
 # print PATH environment variable split by new lines
 function path {
     echo $env:PATH.split(';')
+}
+
+# include local function definitions
+$localFunctions = $PSScriptRoot + "\local-functions.ps1"
+if (Test-Path $localFunctions) {
+    . $localFunctions
+}
+
+# include local configuration
+$localProfile = $PSScriptRoot + "\local.ps1"
+if (Test-Path $localProfile) {
+    . $localProfile
 }
