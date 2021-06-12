@@ -25,6 +25,7 @@ if (Test-Path($ChocolateyProfile)) {
 
 
 # - - - configure modules - - -
+
 # configure PSReadline module
 #Set-PSReadlineKeyHandler -Key Tab -Function Complete # bash-like auto-complete
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
@@ -36,7 +37,9 @@ Set-PSReadlineKeyHandler -Key Alt+Delete -Function ViReplaceLine # delete the wh
 Set-PSReadlineKeyHandler -Key Ctrl+] -Function GotoBrace # go to the matching brace
 Set-PSReadlineKeyHandler -Key Ctrl+/ -Function ShowKeyBindings
 Set-PSReadlineKeyHandler -Key Ctrl+shift+? -Function WhatIsKey
+Set-PSReadLineOption -PredictionSource History # enable predictive IntelliSense, set to None to disable
 Set-PSReadLineOption –HistoryNoDuplicates:$True
+Set-PSReadLineOption –HistorySearchCursorMovesToEnd:$True
 Set-PSReadLineOption -ExtraPromptLineCount:5
 Set-PSReadLineOption -ShowToolTips:$True #show tooltips in the list of completions
 
