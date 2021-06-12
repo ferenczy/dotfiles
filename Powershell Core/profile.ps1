@@ -1,7 +1,7 @@
-﻿# Dawid Ferenczy 2015 - 2019
+﻿# Dawid Ferenczy 2015 - 2021
 # http://github.com/ferenczy/dotfiles
 #
-# PowerShell 6 Core profile "Current User All Hosts"
+# PowerShell Core profile "Current User All Hosts"
 #
 # Location: %SystemDrive%\Users\<username>\Documents\PowerShell\profile.ps1
 #
